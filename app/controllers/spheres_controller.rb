@@ -3,14 +3,17 @@ class SpheresController < ApplicationController
 
   # GET /spheres
   def index
-    @spheres = Sphere.all
-
-    render json: @spheres
+    spheres = Sphere.all
+    render json: SphereSerializer.new(spheres)
   end
 
   # GET /spheres/1
   def show
-    render json: @sphere
+    sphere = Sphere.find(params[:id])
+      options = {
+    include: [:user, :goals]
+  }
+  render json: SphereSerializer.new(sphere, options)
   end
 
   # POST /spheres

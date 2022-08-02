@@ -3,15 +3,22 @@ class GoalsController < ApplicationController
 
   # GET /goals
   def index
-    @goals = Goal.all
-
-    render json: @goals
+    goals = Goal.all
+    options = {
+    include: [:spheres]
+  }
+    render json: GoalSerializer.new(goals, options)
   end
 
   # GET /goals/1
   def show
-    render json: @goal
-  end
+    goal = Goal.find(params[:id])
+    options = {
+  include: [:spheres]
+}
+    render json: GoalSerializer.new(goal, options)
+
+end
 
   # POST /goals
   def create
