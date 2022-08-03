@@ -11,9 +11,13 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    #previous code
+    # @user = User.find(params[:id])
+    # render json: UserSerializer.new(@user)
+   
+    #now, it will show only the authenticated user (w/ jwt)
+      render json: { user: UserSerializer.new(current_user) }, status: :accepted
     
-    @user = User.find(params[:id])
-    render json: UserSerializer.new(@user)
   end
 
   # POST /users
