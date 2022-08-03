@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :goals
   resources :spheres
   resources :users
+  post '/login', to: 'auth#create'
+  get '/profile', to: 'users#profile'
 
   resources :users do
     resources :spheres 
