@@ -16,6 +16,7 @@ class AuthController < ApplicationController
                },
                status: :accepted
       else
+        
         render json: {
                  message: 'Invalid username or password',
                },
@@ -27,7 +28,9 @@ class AuthController < ApplicationController
   
     def user_login_params
       # params { user: {username: 'Chandler Bing', password: 'hi' } }
-      params.require(:user).permit(:name, :password, :email)
+      # params.require(:user).permit(:name, :password, :email)
+      # params.permit(:name, :password, :email)
+      params.require(:auth).permit(:name, :password, :email)
     end
 
 end
